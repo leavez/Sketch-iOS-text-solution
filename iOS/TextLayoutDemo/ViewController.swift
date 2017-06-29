@@ -35,13 +35,13 @@ class ViewController: UIViewController {
                 ])
         }
 
-        let text = "Hello World\nI’m so\nhungry"
 
         let labels = [
-            (15, 1.2),
-            (30, 1.2),
-            (80, 1.5)
-            ].map { (fontSize:CGFloat, m: CGFloat) -> UILabel in
+            ("Hello 我饿了", 15, 1),
+            ("你好包子\n我\n饿了", 30, 1.2),
+            ("Hello World\nI'm so我\nhungry 饿了", 80, 1.5),
+            ("Hello World\n我\n饿了", 15, 1.2),
+            ].map { (text:String, fontSize:CGFloat, m: CGFloat) -> UILabel in
             let attributedString = attribtuedString(from: text, fontSize: fontSize, lineHeightMultiple: m)
             return getAlabel(attributedString: attributedString)
         }
@@ -56,10 +56,13 @@ class ViewController: UIViewController {
             let left = label.leftAnchor.constraint(equalTo: self.view.leftAnchor)
             self.view.addConstraints([top,left])
             switch index {
-            case 0: top.constant = 0
+            case 0, 3: top.constant = 0
             case 1: top.constant = 80
             case 2: top.constant = 250
             case _: ()
+            }
+            if index == 3 {
+                left.constant = 200
             }
         }
 
